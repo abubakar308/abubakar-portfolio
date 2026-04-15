@@ -3,6 +3,7 @@ import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import BackToTop from "@/components/common/BackToTop";
+import CursorGlow from "@/components/common/CursorGlow";
 
 
 const spaceGrotesk = Space_Grotesk({
@@ -36,6 +37,7 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${inter.variable}`}
     >
       <body className="antialiased">
+        <CursorGlow />
         <SmoothScroll>{children}</SmoothScroll>
         <BackToTop />
       </body>

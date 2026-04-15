@@ -44,8 +44,8 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
               e.currentTarget.src = `https://placehold.co/600x400/0F172A/06B6D4?text=${encodeURIComponent(project.name)}`;
             }}
           />
-          {/* Premium Hover Overlay */}
-          <div className="absolute inset-0 z-10 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 pointer-events-none group-hover:pointer-events-auto">
+          {/* Premium Hover Overlay — action buttons only */}
+          <div className="absolute inset-0 z-10 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 pointer-events-none group-hover:pointer-events-auto">
             <div className="absolute inset-0 flex items-center justify-center p-4">
               <div className="flex flex-col sm:flex-row items-center gap-3 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
                 <a href={project.liveLink} target="_blank" rel="noopener noreferrer">
@@ -68,34 +68,8 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                     GitHub
                   </Button>
                 </a>
-
-                {project.challenges && (
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    className="h-11 rounded-full px-5 bg-white/10 border-white/20 text-white hover:bg-white/15 hover:border-white/30 shadow-lg shadow-black/10"
-                  >
-                    Details
-                  </Button>
-                )}
               </div>
             </div>
-            {(challenges.length > 0 || highlights.length > 0) && (
-              <div className="absolute left-4 right-4 bottom-4 rounded-xl bg-black/45 border border-white/15 px-3 py-2 text-white opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 delay-75">
-                {challengePreview && (
-                  <p className="text-[11px] leading-relaxed line-clamp-1">
-                    <span className="mr-1">⚡</span>
-                    {challengePreview}
-                  </p>
-                )}
-                {highlightPreview && (
-                  <p className="text-[11px] leading-relaxed line-clamp-1 mt-1">
-                    <span className="mr-1">🚀</span>
-                    {highlightPreview}
-                  </p>
-                )}
-              </div>
-            )}
           </div>
         </div>
 

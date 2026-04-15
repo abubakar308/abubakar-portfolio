@@ -65,7 +65,7 @@ export default function Navbar() {
                 width={28}
                 height={28}
                 priority
-                className="object-contain brightness-[0.92] contrast-125 dark:brightness-110 dark:contrast-125"
+                className="object-contain brightness-[0.92] contrast-125 dark:invert dark:brightness-200"
               />
             </div>
           </Link>
