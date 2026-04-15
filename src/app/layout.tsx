@@ -18,6 +18,11 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Md Abu Bakar Siddique | Full Stack Developer",
   description: "Portfolio of Md Abu Bakar Siddique, a Full Stack Developer specializing in Next.js, TypeScript, and modern web technologies.",
+  icons: {
+    icon: "/images/logo.png",
+    shortcut: "/images/logo.png",
+    apple: "/images/logo.png",
+  },
 };
 
 export default function RootLayout({

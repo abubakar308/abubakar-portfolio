@@ -1,6 +1,7 @@
 "use client";
 
 import type { IconType } from "react-icons";
+import type React from "react";
 import {
   SiCss,
   SiExpress,
@@ -18,8 +19,11 @@ import {
   SiReact,
   SiTailwindcss,
   SiTypescript,
+  SiDocker,
+  SiVercel,
+  SiFirebase,
+  SiSupabase,
 } from "react-icons/si";
-import { Card, CardContent } from "@/components/ui/card";
 import Reveal from "@/components/common/Reveal";
 
 type SkillItem = {
@@ -28,19 +32,15 @@ type SkillItem = {
 };
 
 type SkillCategory = {
-  title: "Frontend" | "Backend" | "Database" | "Tools";
-  description: string;
+  title: string;
   skills: SkillItem[];
-  tier: "primary" | "secondary";
-  animation: "left" | "right" | "float" | "none";
+  direction: "left" | "right";
 };
 
 const skillCategories: SkillCategory[] = [
   {
     title: "Frontend",
-    description: "Modern UI engineering for fast, polished user experiences.",
-    tier: "primary",
-    animation: "left",
+    direction: "right",
     skills: [
       { name: "HTML", icon: SiHtml5 },
       { name: "CSS", icon: SiCss },
@@ -49,118 +49,130 @@ const skillCategories: SkillCategory[] = [
       { name: "React", icon: SiReact },
       { name: "Next.js", icon: SiNextdotjs },
       { name: "Tailwind CSS", icon: SiTailwindcss },
+      { name: "Figma", icon: SiFigma },
     ],
   },
   {
     title: "Backend",
-    description: "API and server-side foundations focused on performance and scale.",
-    tier: "primary",
-    animation: "right",
+    direction: "left",
     skills: [
       { name: "Node.js", icon: SiNodedotjs },
       { name: "Express.js", icon: SiExpress },
       { name: "Prisma", icon: SiPrisma },
-    ],
-  },
-  {
-    title: "Database",
-    description: "Reliable data-layer design with relational and document databases.",
-    tier: "secondary",
-    animation: "float",
-    skills: [
       { name: "MongoDB", icon: SiMongodb },
       { name: "PostgreSQL", icon: SiPostgresql },
+      { name: "Firebase", icon: SiFirebase },
+      { name: "Supabase", icon: SiSupabase },
     ],
   },
   {
-    title: "Tools",
-    description: "Professional workflows for collaboration, testing, and design.",
-    tier: "secondary",
-    animation: "none",
+    title: "Other",
+    direction: "right",
     skills: [
       { name: "Git", icon: SiGit },
       { name: "GitHub", icon: SiGithub },
       { name: "Postman", icon: SiPostman },
-      { name: "Figma", icon: SiFigma },
+      { name: "Docker", icon: SiDocker },
+      { name: "Vercel", icon: SiVercel },
     ],
   },
 ];
 
 export default function Skills() {
-  const animationClass = (type: SkillCategory["animation"]) => {
-    if (type === "left") return "motion-safe:animate-skill-slide-right";
-    if (type === "right") return "motion-safe:animate-skill-slide-left";
-    if (type === "float") return "motion-safe:animate-skill-float";
-    return "";
-  };
+const animationClass = (direction: "left" | "right") => {
+  return direction === "left"
+    ? "animate-skill-marquee-left"
+    : "animate-skill-marquee-right";
+};
 
   return (
-    <section id="skills" className="py-24 px-6 bg-background relative overflow-hidden">
-      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-section to-transparent" />
+    <section id="skills" className="relative overflow-hidden bg-background py-24">
+      <div className="absolute left-0 top-0 h-32 w-full bg-gradient-to-b from-section to-transparent opacity-50" />
 
-      <div className="max-w-7xl mx-auto space-y-20 relative z-10">
+      <div className="relative z-10 mb-16 mx-auto max-w-7xl px-6">
         <Reveal className="mx-auto" width="100%">
-          <div className="text-center space-y-4 max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-3 text-accent-brand font-bold uppercase tracking-widest text-sm mb-2">
+          <div className="mx-auto max-w-3xl space-y-4 text-center">
+            <div className="mb-2 inline-flex items-center gap-3 text-sm font-bold uppercase tracking-widest text-accent-brand">
               <span className="h-0.5 w-10 bg-accent-brand" />
               Technical Arsenal
               <span className="h-0.5 w-10 bg-accent-brand" />
             </div>
-            <h2 className="text-4xl md:text-5xl font-heading font-extrabold text-foreground">
+
+            <h2 className="font-heading text-4xl font-extrabold text-foreground md:text-5xl">
               Professional <span className="text-accent-brand">Skillset</span>
             </h2>
-            <p className="text-lg text-text-body leading-relaxed max-w-2xl mx-auto">
+
+            <p className="mx-auto max-w-2xl text-lg leading-relaxed text-text-body">
               A recruiter-friendly overview of the core technologies I use to build
               robust, modern products.
             </p>
           </div>
         </Reveal>
+      </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
-          {skillCategories.map((category, idx) => (
-            <Reveal
-              key={category.title}
-              delay={0.1 * idx}
-              className="h-full w-full lg:col-span-6"
-              width="100%"
-            >
-              <Card
-                className="group h-full border-2 border-border/40 bg-card shadow-sm shadow-black/5 transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/10 hover:border-accent-brand/40"
-              >
-                <CardContent className="p-8 space-y-6">
-                  <div className="space-y-2">
-                    <h3
-                      className={`font-heading font-extrabold text-foreground ${
-                        category.tier === "primary" ? "text-2xl md:text-[1.75rem]" : "text-xl md:text-2xl"
-                      }`}
-                    >
-                      {category.title}
-                    </h3>
-                    <p className="text-sm text-text-body/75 leading-relaxed">
-                      {category.description}
-                    </p>
-                  </div>
-
-                  <div
-                    className={`grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-3.5 max-md:animate-none ${animationClass(category.animation)} group-hover:[animation-play-state:paused]`}
-                  >
-                    {category.skills.map((skill) => (
-                      <div key={skill.name} className="group/skill">
-                        <div className="h-full rounded-2xl border border-border/70 bg-background/40 dark:bg-background/20 p-4 flex flex-col items-center justify-center text-center gap-3 transition-all duration-300 group-hover/skill:border-accent-brand/40 group-hover/skill:bg-accent-brand/5 group-hover/skill:shadow-lg group-hover/skill:shadow-accent-brand/10">
-                          <skill.icon className="w-8 h-8 text-foreground/75 group-hover/skill:text-accent-brand transition-colors" />
-                          <p className="text-xs font-bold uppercase tracking-wider text-text-body/90 group-hover/skill:text-foreground transition-colors">
-                            {skill.name}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+      <div className="flex flex-col gap-10">
+        {skillCategories.map((category) => (
+          <div key={category.title} className="space-y-4">
+            <Reveal width="100%" className="mx-auto max-w-7xl px-6">
+              <h3 className="ml-4 border-l-4 border-accent-brand px-2 text-lg font-bold uppercase tracking-widest text-foreground/80 md:ml-0">
+                {category.title}
+              </h3>
             </Reveal>
-          ))}
-        </div>
+
+            <div className="relative overflow-hidden py-4">
+              <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-background to-transparent" />
+              <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-background to-transparent" />
+
+              <div className="group mx-auto max-w-7xl overflow-hidden px-6">
+               <div
+    className={`flex w-max gap-6 ${animationClass(category.direction)}`}
+    style={
+      {
+        ["--skill-motion-duration"]: "45s",
+      } as React.CSSProperties
+    }
+    onMouseEnter={(e) => {
+      (e.currentTarget as HTMLElement).style.animationPlayState = "paused";
+    }}
+    onMouseLeave={(e) => {
+      (e.currentTarget as HTMLElement).style.animationPlayState = "running";
+    }}
+  >
+                  {[...category.skills, ...category.skills].map((skill, index) => (
+                    <SkillIcon
+                      key={`${category.title}-${skill.name}-${index}`}
+                      skill={skill}
+                      ariaHidden={index >= category.skills.length}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
+  );
+}
+
+function SkillIcon({
+  skill,
+  ariaHidden = false,
+}: {
+  skill: SkillItem;
+  ariaHidden?: boolean;
+}) {
+  return (
+    <div
+      className="group/skill shrink-0"
+      aria-hidden={ariaHidden ? "true" : undefined}
+    >
+      <div className="flex min-w-[150px] items-center justify-center gap-3 rounded-2xl border border-border/70 bg-card p-5 text-center transition-all duration-300 hover:scale-[1.05] group-hover/skill:border-accent-brand/50 group-hover/skill:bg-accent-brand/5 group-hover/skill:shadow-xl group-hover/skill:shadow-accent-brand/10 md:min-w-[190px] md:p-6">
+        <skill.icon className="h-6 w-6 text-foreground/75 transition-colors group-hover/skill:text-accent-brand md:h-8 md:w-8" />
+        <p className="whitespace-nowrap text-sm font-bold uppercase tracking-wider text-text-body transition-colors group-hover/skill:text-foreground md:text-base">
+          {skill.name}
+        </p>
+      </div>
+    </div>
   );
 }

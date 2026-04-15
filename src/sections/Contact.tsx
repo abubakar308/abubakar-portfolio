@@ -42,7 +42,7 @@ export default function Contact() {
 
                      <div className="space-y-1">
                         <p className="text-foreground font-heading font-bold text-lg uppercase tracking-wider">Email Me</p>
-                        <p className="text-text-body/70">abubakar@example.com</p>
+                        <p className="text-text-body/70">mdabubakar.dev@gmail.com</p>
                      </div>
 
                  </div>
@@ -53,7 +53,7 @@ export default function Contact() {
                     </div>
                      <div className="space-y-1">
                         <p className="text-foreground font-heading font-bold text-lg uppercase tracking-wider">Call Me</p>
-                        <p className="text-text-body/70">+880 1234 567 890</p>
+                        <p className="text-text-body/70">+880 1773398308</p>
                      </div>
 
                  </div>

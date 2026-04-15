@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, Github, Linkedin, Facebook, Mail } from "lucide-react";
+import Image from "next/image";
+import { Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
@@ -25,148 +26,132 @@ const navLinks = [
   { name: "Contact", href: "#contact" },
 ];
 
-const socialLinks = [
-  { name: "GitHub", href: "https://github.com/abubakar308", icon: Github },
-  { name: "LinkedIn", href: "https://www.linkedin.com/in/abubakar308/", icon: Linkedin },
-  { name: "Facebook", href: "https://www.facebook.com/mdabubakar308", icon: Facebook },
-  { name: "Email", href: "mailto:mdabubakar.dev@gmail.com", icon: Mail },
-];
-
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 40);
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navClasses = cn(
-    "fixed top-0 left-0 right-0 z-50 transition-all duration-500 px-6 py-5",
+    "fixed left-0 right-0 top-0 z-50 px-6 transition-all duration-500",
     scrolled
-      ? "bg-background/80 backdrop-blur-xl border-b border-border/50 py-3 shadow-[0_2px_20px_rgba(0,0,0,0.03)] dark:shadow-[0_2px_20px_rgba(0,0,0,0.2)]"
-      : "bg-transparent"
+      ? "py-3 bg-background/78 backdrop-blur-2xl border-b border-border/70 shadow-[0_10px_35px_rgba(15,23,42,0.06)] dark:shadow-[0_12px_40px_rgba(0,0,0,0.35)]"
+      : "py-5 bg-background/60 backdrop-blur-md border-b border-transparent"
   );
 
-
-  const textClasses = cn(
-    "transition-colors duration-300",
-    scrolled ? "text-foreground" : "text-foreground"
-  );
-
+  const linkClasses =
+    "text-sm font-bold uppercase tracking-[0.18em] text-foreground/90 hover:text-accent-brand transition-colors duration-300";
 
   return (
     <header className={navClasses}>
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <div className="mx-auto flex max-w-7xl items-center justify-between">
         <Magnetic>
           <Link
             href="/"
-            className={cn(
-              "text-xl font-heading font-bold tracking-tighter hover:text-accent-brand transition-colors",
-              textClasses
-            )}
+            aria-label="Go to homepage"
+            className="group inline-flex items-center"
           >
-            MD ABU BAKAR SIDDIQUE
+            <div className="flex h-12 w-12 items-center justify-center transition-all duration-300 group-hover:border-accent-brand/50 group-hover:bg-accent-brand/5 group-hover:shadow-lg">
+              <Image
+                src="/images/logo.png"
+                alt="Logo"
+                width={28}
+                height={28}
+                priority
+                className="object-contain brightness-[0.92] contrast-125 dark:brightness-110 dark:contrast-125"
+              />
+            </div>
           </Link>
         </Magnetic>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-7 lg:gap-8">
+        <nav className="hidden items-center gap-7 md:flex lg:gap-9">
           {navLinks.map((link) => (
             <motion.div
               key={link.name}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.97 }}
             >
-              <a
-                href={link.href}
-                className={cn(
-                  "text-sm font-bold uppercase tracking-widest hover:text-accent-brand transition-colors",
-                  textClasses
-                )}
-              >
+              <a href={link.href} className={linkClasses}>
                 {link.name}
               </a>
             </motion.div>
           ))}
 
           <Magnetic>
-            <ThemeToggle />
+            <div className="rounded-full border border-border bg-section/90 p-1 shadow-sm dark:bg-card/80">
+              <ThemeToggle />
+            </div>
           </Magnetic>
         </nav>
 
-        {/* Mobile Nav Trigger */}
-        <div className="md:hidden flex items-center gap-4">
+        <div className="flex items-center gap-3 md:hidden">
           <Magnetic>
-            <ThemeToggle />
+            <div className="rounded-full border border-border bg-section/90 p-1 shadow-sm dark:bg-card/80">
+              <ThemeToggle />
+            </div>
           </Magnetic>
+
           <Drawer open={isOpen} onOpenChange={setIsOpen} direction="right">
             <DrawerTrigger asChild>
-              <Button variant="ghost" size="icon" className={textClasses}>
-                <Menu className="w-6 h-6" />
+              <Button
+                variant="ghost"
+                size="icon"
+                className="rounded-full border border-border bg-section/90 text-foreground shadow-sm hover:bg-accent-brand/5 hover:text-accent-brand dark:bg-card/80"
+              >
+                <Menu className="h-5 w-5" />
               </Button>
             </DrawerTrigger>
-            <DrawerContent className="bg-background/95 backdrop-blur-xl border-l border-border h-full max-w-[320px] w-[80%] rounded-l-[1.5rem] p-0 shadow-2xl">
-              <div className="flex flex-col h-full overflow-y-auto">
-                {/* Header */}
-                <div className="p-6 pb-4 flex items-center justify-between">
-                  <div className="text-sm font-heading font-extrabold tracking-tighter text-foreground/40 uppercase">
+
+            <DrawerContent className="h-full w-[82%] max-w-[320px] rounded-l-[1.5rem] border-l border-border bg-background/95 p-0 shadow-2xl backdrop-blur-2xl">
+              <div className="flex h-full flex-col overflow-y-auto">
+                <div className="flex items-center justify-between p-6 pb-4">
+                  <div className="text-sm font-heading font-extrabold uppercase tracking-[0.18em] text-foreground/45">
                     Portfolio
                   </div>
+
                   <DrawerClose asChild>
-                     <Button variant="ghost" size="icon" className="rounded-full hover:bg-accent-brand/10 hover:text-accent-brand transition-colors">
-                        <X className="w-5 h-5" />
-                     </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="rounded-full border border-border bg-section/80 text-foreground hover:bg-accent-brand/10 hover:text-accent-brand dark:bg-card/80"
+                    >
+                      <X className="h-5 w-5" />
+                    </Button>
                   </DrawerClose>
                 </div>
 
                 <div className="px-6 py-2">
-                   <DrawerTitle className="text-xl font-heading font-extrabold text-foreground pb-4 border-b border-border/50">
-                     Navigation
-                   </DrawerTitle>
+                  <DrawerTitle className="border-b border-border/60 pb-4 font-heading text-xl font-extrabold text-foreground">
+                  </DrawerTitle>
                 </div>
 
-                {/* Main Links */}
-                <nav className="flex-1 px-4 py-4 flex flex-col gap-1">
+                <nav className="flex flex-1 flex-col gap-1 px-4 py-4">
                   {navLinks.map((link) => (
                     <a
                       key={link.name}
                       href={link.href}
                       onClick={() => setIsOpen(false)}
-                      className="group flex items-center justify-between p-4 rounded-2xl hover:bg-accent-brand/5 text-base font-bold uppercase tracking-widest text-foreground/80 hover:text-accent-brand transition-all"
+                      className="group flex items-center justify-between rounded-2xl p-4 text-base font-bold uppercase tracking-[0.14em] text-foreground/80 transition-all duration-300 hover:bg-accent-brand/5 hover:text-accent-brand"
                     >
                       {link.name}
-                      <span className="w-1.5 h-1.5 rounded-full bg-accent-brand scale-0 group-hover:scale-100 transition-transform" />
+                      <span className="h-1.5 w-1.5 scale-0 rounded-full bg-accent-brand transition-transform duration-300 group-hover:scale-100" />
                     </a>
                   ))}
                 </nav>
 
-                {/* Footer Section */}
-                <div className="p-6 pt-0 mt-auto space-y-8">
-                   <div className="space-y-4">
-                      <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/40 pl-1">Keep in Touch</p>
-                      <div className="flex gap-3">
-                         {socialLinks.map((social) => (
-                            <Link
-                               key={social.name}
-                               href={social.href}
-                               target="_blank"
-                               rel="noopener noreferrer"
-                               className="p-3 bg-secondary/10 hover:bg-accent-brand/10 text-foreground/60 hover:text-accent-brand hover:shadow-lg transition-all rounded-xl"
-                               title={social.name}
-                            >
-                               <social.icon className="w-4 h-4" />
-                            </Link>
-                         ))}
-                      </div>
-                   </div>
-
-                   <div className="pt-4 text-center">
-                       <p className="text-[10px] font-medium text-foreground/30">© {new Date().getFullYear()} Md Abu Bakar Siddique</p>
-                   </div>
+                <div className="mt-auto p-6 pt-0">
+                  <div className="pt-4 text-center">
+                    <p className="text-[10px] font-medium text-foreground/35">
+                      © {new Date().getFullYear()} Md Abu Bakar Siddique
+                    </p>
+                  </div>
                 </div>
               </div>
             </DrawerContent>

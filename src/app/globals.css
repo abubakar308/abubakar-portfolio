@@ -9,8 +9,7 @@
   --color-foreground: var(--foreground);
   --font-heading: var(--font-space-grotesk);
   --font-body: var(--font-inter);
-  
-  /* Branded Professional Colors */
+
   --color-section: var(--section);
   --color-card: var(--card);
   --color-border: var(--border);
@@ -38,72 +37,77 @@
   --radius-3xl: calc(var(--radius) * 2.2);
 }
 
-
 :root {
-  /* Light Theme Branded */
-  --background: #F8FAFC;      /* Page background */
-  --section: #FFFFFF;         /* Section background */
-  --card: #F1F5F9;            /* Card background */
-  --border: #E2E8F0;          /* Border */
-  --foreground: #0F172A;      /* Heading text */
-  --text-body: #475569;       /* Body text */
-  --accent-brand: #0891B2;    /* Main Accent */
-  --accent-soft: #06B6D4;     /* Soft Accent */
+  /* Premium Light Theme */
+  --background: #f5f8fc;
+  --section: #ffffff;
+  --card: #eef4fa;
+  --border: #d8e2ee;
+  --foreground: #0f172a;
+  --text-body: #52637a;
+  --accent-brand: #0891b2;
+  --accent-soft: #06b6d4;
 
-  --primary: #0F172A;
-  --primary-foreground: #F8FAFC;
-  --secondary: #E2E8F0;
-  --secondary-foreground: #0F172A;
-  --muted: #F1F5F9;
-  --muted-foreground: #64748B;
-  --accent: #0891B2;
-  --accent-foreground: #FFFFFF;
-  --destructive: #EF4444;
-  --input: #E2E8F0;
-  --ring: #0F172A;
+  --primary: #0f172a;
+  --primary-foreground: #f8fafc;
+  --secondary: #e9f0f7;
+  --secondary-foreground: #0f172a;
+  --muted: #f3f7fb;
+  --muted-foreground: #6b7c93;
+  --accent: #0891b2;
+  --accent-foreground: #ffffff;
+  --destructive: #dc2626;
+  --input: #dbe5f0;
+  --ring: #0891b2;
   --radius: 0.75rem;
 }
 
-
 .dark {
-  /* Dark Theme Branded */
-  --background: #07111F;      /* Page background */
-  --section: #0B1220;         /* Section background */
-  --card: #111C31;            /* Card background */
-  --border: #1E2A44;          /* Border */
-  --foreground: #F8FAFC;      /* Heading text */
-  --text-body: #CBD5E1;       /* Body text */
-  --accent-brand: #06B6D4;    /* Main Accent */
-  --accent-soft: #0891B2;     /* Accent hover state */
+  /* Premium Dark Theme */
+  --background: #06101d;
+  --section: #0b1526;
+  --card: #101d33;
+  --border: #1f3352;
+  --foreground: #f8fafc;
+  --text-body: #b8c7db;
+  --accent-brand: #14c7f5;
+  --accent-soft: #22d3ee;
 
-  --primary: #06B6D4;
-  --primary-foreground: #07111F;
-  --secondary: #1E2A44;
-  --secondary-foreground: #F8FAFC;
-  --muted: #111C31;
-  --muted-foreground: #94A3B8;
-  --accent: #06B6D4;
-  --accent-foreground: #07111F;
-  --destructive: #7F1D1D;
-  --border: #1E2A44;
-  --input: #1E2A44;
-  --ring: #06B6D4;
+  --primary: #14c7f5;
+  --primary-foreground: #06101d;
+  --secondary: #13233d;
+  --secondary-foreground: #f8fafc;
+  --muted: #0f1c31;
+  --muted-foreground: #8ca0b8;
+  --accent: #14c7f5;
+  --accent-foreground: #06101d;
+  --destructive: #7f1d1d;
+  --input: #1f3352;
+  --ring: #14c7f5;
 }
-
-
 
 @layer base {
   * {
     @apply border-border outline-ring/50 transition-colors duration-300;
   }
+
+  html {
+    @apply bg-background;
+  }
+
   body {
     @apply bg-background text-text-body font-body;
   }
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-heading uppercase tracking-tight text-foreground;
   }
 }
-
 
 /* Lenis Smooth Scroll Stylings */
 html.lenis,
@@ -127,52 +131,32 @@ html.lenis body {
   pointer-events: none;
 }
 
-@keyframes skill-slide-right {
-  0%,
-  100% {
+@keyframes skill-marquee-left {
+  from {
     transform: translateX(0);
   }
-  50% {
-    transform: translateX(8px);
+  to {
+    transform: translateX(-50%);
   }
 }
 
-@keyframes skill-slide-left {
-  0%,
-  100% {
+@keyframes skill-marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
     transform: translateX(0);
   }
-  50% {
-    transform: translateX(-8px);
-  }
 }
 
-@keyframes skill-float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-4px);
-  }
+.animate-skill-marquee-left {
+  animation: skill-marquee-left 45s linear infinite;
 }
 
-.animate-skill-slide-right {
-  animation: skill-slide-right 16s ease-in-out infinite;
+.animate-skill-marquee-right {
+  animation: skill-marquee-right 45s linear infinite;
 }
 
-.animate-skill-slide-left {
-  animation: skill-slide-left 16s ease-in-out infinite;
-}
 
-.animate-skill-float {
-  animation: skill-float 12s ease-in-out infinite;
-}
 
-@media (max-width: 768px) {
-  .animate-skill-slide-right,
-  .animate-skill-slide-left,
-  .animate-skill-float {
-    animation: none;
-  }
-}
+

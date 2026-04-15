@@ -73,19 +73,6 @@ export default function Projects() {
             </Button>
           </div>
         )}
-
-        {/* View All Button */}
-        <Reveal delay={0.4} className="text-center pt-8">
-          <Button variant="ghost" className="text-text-body hover:text-foreground group text-lg font-bold transition-all hover:bg-accent-brand/5 rounded-full px-8 hover:scale-105 active:scale-95">
-            Explore All Projects
-            <motion.span
-              animate={{ x: [0, 5, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            >
-              <ExternalLink className="w-5 h-5 ml-2" />
-            </motion.span>
-          </Button>
-        </Reveal>
       </div>
     </section>
   );
