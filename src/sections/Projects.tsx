@@ -1,8 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { motion } from "framer-motion";
-import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { projects } from "@/data/projects";
 import ProjectCard from "@/components/common/ProjectCard";
@@ -19,41 +17,43 @@ export default function Projects() {
   }, [currentPage]);
 
   return (
-    <section id="projects" className="py-24 px-6 bg-background">
+    <section id="projects" className="py-20 md:py-24 bg-background">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
 
-      <div className="max-w-7xl mx-auto space-y-16">
         {/* Header */}
         <Reveal>
-          <div className="space-y-4 max-w-2xl">
-            <div className="flex items-center gap-3 text-accent-brand font-bold uppercase tracking-widest text-sm">
-              <span className="h-0.5 w-10 bg-accent-brand" />
+          <div className="space-y-3 max-w-2xl">
+            <div className="flex items-center gap-3 text-accent-brand font-bold uppercase tracking-widest text-xs sm:text-sm">
+              <span className="h-0.5 w-8 bg-accent-brand" />
               My Portfolio
             </div>
-            <h2 className="text-4xl md:text-5xl font-heading font-extrabold text-foreground">
-              My Completed <span className="text-accent-brand">Projects</span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-extrabold text-foreground leading-tight">
+              My Completed{" "}
+              <span className="text-accent-brand">Projects</span>
             </h2>
-
-            <p className="text-lg text-text-body leading-relaxed max-w-2xl">
-              A selection of my recent works where I&apos;ve balanced high-performance code with exceptional user experiences.
+            <p className="text-sm sm:text-base text-text-body leading-relaxed max-w-xl">
+              Real-world, full-stack applications built with modern technologies
+              — from concept to production.
             </p>
           </div>
         </Reveal>
 
         {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
           {paginatedProjects.map((project, idx) => (
             <ProjectCard key={project.name} project={project} index={idx} />
           ))}
         </div>
 
+        {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-center gap-3">
+          <div className="flex items-center justify-center gap-3 pt-2">
             <Button
               variant="outline"
               size="sm"
               onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
               disabled={currentPage === 1}
-              className="rounded-full px-5"
+              className="rounded-full px-5 text-xs font-bold"
             >
               Previous
             </Button>
@@ -67,7 +67,7 @@ export default function Projects() {
                 setCurrentPage((prev) => Math.min(prev + 1, totalPages))
               }
               disabled={currentPage === totalPages}
-              className="rounded-full px-5"
+              className="rounded-full px-5 text-xs font-bold"
             >
               Next
             </Button>

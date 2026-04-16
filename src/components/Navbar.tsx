@@ -2,8 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import { ArrowRight, Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,7 +14,6 @@ import {
 } from "@/components/ui/drawer";
 import { cn } from "@/lib/utils";
 import ThemeToggle from "@/components/common/ThemeToggle";
-import Magnetic from "@/components/common/Magnetic";
 
 const navLinks = [
   { name: "Home", href: "#home" },
@@ -31,104 +29,95 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
-    };
-
+    const handleScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navClasses = cn(
-    "fixed left-0 right-0 top-0 z-50 px-6 transition-all duration-500",
+    "fixed left-0 right-0 top-0 z-50 transition-all duration-500",
     scrolled
-      ? "py-3 bg-background/78 backdrop-blur-2xl border-b border-border/70 shadow-[0_10px_35px_rgba(15,23,42,0.06)] dark:shadow-[0_12px_40px_rgba(0,0,0,0.35)]"
-      : "py-5 bg-background/60 backdrop-blur-md border-b border-transparent"
+      ? "py-3 bg-background/90 backdrop-blur-2xl border-b border-border/70 shadow-[0_8px_30px_rgba(15,23,42,0.06)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.3)]"
+      : "py-5 bg-background/0 border-b border-transparent"
   );
-
-  const linkClasses =
-    "text-sm font-bold uppercase tracking-[0.18em] text-foreground/90 hover:text-accent-brand transition-colors duration-300";
 
   return (
     <header className={navClasses}>
-      <div className="mx-auto flex max-w-7xl items-center justify-between">
-        <Magnetic>
-          <Link
-            href="/"
-            aria-label="Go to homepage"
-            className="group inline-flex items-center"
-          >
-            <div className="flex h-12 w-12 items-center justify-center transition-all duration-300 group-hover:border-accent-brand/50 group-hover:bg-accent-brand/5 group-hover:shadow-lg">
-              <Image
-                src="/images/logo.png"
-                alt="Logo"
-                width={28}
-                height={28}
-                priority
-                className="object-contain brightness-[0.92] contrast-125 dark:invert dark:brightness-200"
-              />
-            </div>
-          </Link>
-        </Magnetic>
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 sm:px-8 lg:px-10">
+        {/* Logo — "AB" monogram */}
+        <Link
+          href="/"
+          aria-label="Go to homepage"
+          className="flex items-center gap-3.5 group"
+        >
+          <div className="bg-teal-500 text-white font-bold rounded-full w-10 h-10 flex items-center justify-center shadow-lg shadow-teal-500/20 group-hover:scale-105 transition-transform duration-300">
+            AB
+          </div>
+          <span className="text-xl font-heading font-bold text-foreground tracking-tight">Abu Bakar</span>
+        </Link>
 
-        <nav className="hidden items-center gap-7 md:flex lg:gap-9">
+        {/* Desktop Nav */}
+        <nav className="hidden items-center gap-2 md:flex lg:gap-4">
           {navLinks.map((link) => (
             <motion.div
               key={link.name}
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.97 }}
+              whileHover={{ y: -1 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <a href={link.href} className={linkClasses}>
+              <a
+                href={link.href}
+                className="px-4 py-2 rounded-xl text-[13px] font-bold text-foreground/70 hover:text-accent-brand hover:bg-accent-brand/5 transition-all duration-300 uppercase tracking-[0.14em]"
+              >
                 {link.name}
               </a>
             </motion.div>
           ))}
 
-          <Magnetic>
-            <div className="rounded-full border border-border bg-section/90 p-1 shadow-sm dark:bg-card/80">
-              <ThemeToggle />
-            </div>
-          </Magnetic>
+          <div className="ml-4 rounded-full border border-border bg-card/50 p-1 shadow-sm transition-hover hover:border-accent-brand/40">
+            <ThemeToggle />
+          </div>
         </nav>
 
+        {/* Mobile Controls */}
         <div className="flex items-center gap-3 md:hidden">
-          <Magnetic>
-            <div className="rounded-full border border-border bg-section/90 p-1 shadow-sm dark:bg-card/80">
-              <ThemeToggle />
-            </div>
-          </Magnetic>
+          <ThemeToggle />
 
           <Drawer open={isOpen} onOpenChange={setIsOpen} direction="right">
             <DrawerTrigger asChild>
               <Button
                 variant="ghost"
                 size="icon"
-                className="rounded-full border border-border bg-section/90 text-foreground shadow-sm hover:bg-accent-brand/5 hover:text-accent-brand dark:bg-card/80"
+                className="rounded-xl border border-border bg-card/50 text-foreground shadow-sm hover:bg-accent-brand/5 hover:text-accent-brand h-10 w-10"
               >
                 <Menu className="h-5 w-5" />
               </Button>
             </DrawerTrigger>
 
-            <DrawerContent className="h-full w-[82%] max-w-[320px] rounded-l-[1.5rem] border-l border-border bg-background/95 p-0 shadow-2xl backdrop-blur-2xl">
-              <div className="flex h-full flex-col overflow-y-auto">
-                <div className="flex items-center justify-between p-6 pb-4">
-                  <div className="text-sm font-heading font-extrabold uppercase tracking-[0.18em] text-foreground/45">
-                    Portfolio
+            <DrawerContent className="h-full w-[85%] max-w-[320px] rounded-l-[2rem] border-l border-border bg-background/98 p-0 shadow-2xl backdrop-blur-3xl">
+              <div className="flex h-full flex-col">
+                <div className="flex items-center justify-between p-7 pb-6">
+                  <div className="flex items-center gap-3.5">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-teal-500 text-white font-bold text-sm shadow-md shadow-teal-500/10">
+                      AB
+                    </div>
+                    <span className="text-lg font-bold text-foreground tracking-tight">
+                      Abu Bakar
+                    </span>
                   </div>
-
                   <DrawerClose asChild>
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="rounded-full border border-border bg-section/80 text-foreground hover:bg-accent-brand/10 hover:text-accent-brand dark:bg-card/80"
+                      className="rounded-xl border border-border bg-card/50 text-foreground hover:bg-accent-brand/10 hover:text-accent-brand h-9 w-9"
                     >
                       <X className="h-5 w-5" />
                     </Button>
                   </DrawerClose>
                 </div>
 
-                <div className="px-6 py-2">
-                  <DrawerTitle className="border-b border-border/60 pb-4 font-heading text-xl font-extrabold text-foreground">
+                <div className="px-7 py-2">
+                  <DrawerTitle className="border-b border-border/60 pb-4 font-heading text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/40">
+                    Navigation
                   </DrawerTitle>
                 </div>
 
@@ -138,17 +127,20 @@ export default function Navbar() {
                       key={link.name}
                       href={link.href}
                       onClick={() => setIsOpen(false)}
-                      className="group flex items-center justify-between rounded-2xl p-4 text-base font-bold uppercase tracking-[0.14em] text-foreground/80 transition-all duration-300 hover:bg-accent-brand/5 hover:text-accent-brand"
+                      className="group flex items-center justify-between rounded-2xl px-5 py-4 text-sm font-bold uppercase tracking-[0.15em] text-foreground/75 transition-all duration-300 hover:bg-accent-brand/5 hover:text-accent-brand"
                     >
                       {link.name}
-                      <span className="h-1.5 w-1.5 scale-0 rounded-full bg-accent-brand transition-transform duration-300 group-hover:scale-100" />
+                      <ArrowRight className="h-4 w-4 opacity-0 -translate-x-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0" />
                     </a>
                   ))}
                 </nav>
 
-                <div className="mt-auto p-6 pt-0">
-                  <div className="pt-4 text-center">
-                    <p className="text-[10px] font-medium text-foreground/35">
+                <div className="mt-auto p-7 pt-4">
+                  <div className="pt-6 text-center border-t border-border/40">
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-foreground/30">
+                      Full Stack Developer
+                    </p>
+                    <p className="text-[10px] font-medium text-foreground/20 mt-1">
                       © {new Date().getFullYear()} Md Abu Bakar Siddique
                     </p>
                   </div>

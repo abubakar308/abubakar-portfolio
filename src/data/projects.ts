@@ -8,6 +8,7 @@ export interface Project {
   github_server?: string;
   challenges?: string[];
   highlights?: string[];
+  keyFeatures: string[];
 }
 
 export const projects: Project[] = [
@@ -38,6 +39,7 @@ export const projects: Project[] = [
       "Implemented role-based auth (student, tutor, admin) with protected routes using Better Auth and middleware guards.",
       "Designed a conflict-free time-slot booking engine with transactional safety using Prisma transactions.",
     ],
+    keyFeatures: ["Role-based Auth", "Slot Booking", "Tutor Reviews"],
   },
   {
     name: "FoodHub",
@@ -66,6 +68,7 @@ export const projects: Project[] = [
       "Modeled a complex multi-vendor order lifecycle with provider-user relations in Prisma schemas.",
       "Secured all API routes with JWT and role-aware authorization middleware.",
     ],
+    keyFeatures: ["Multi-vendor", "Order Tracking", "AI Search"],
   },
   {
     name: "Certificate Management System",
@@ -95,6 +98,7 @@ export const projects: Project[] = [
       "Built a multi-level approval workflow that routes requests across admin and faculty roles in the correct sequence.",
       "Ensured consistent certificate state transitions with server-side validation to prevent invalid state changes.",
     ],
+    keyFeatures: ["Auto Approvals", "RBAC System", "Live Tracking"],
   },
   {
     name: "MediVendor",
@@ -120,6 +124,7 @@ export const projects: Project[] = [
       "Implemented real-time inventory synchronization to keep stock states accurate across concurrent purchases.",
       "Optimized query-based filtering with indexed fields to handle large medicine catalogs efficiently.",
     ],
+    keyFeatures: ["Medical Shop", "Payments", "Inventory"],
   },
   {
     name: "Learn Together",
@@ -146,6 +151,7 @@ export const projects: Project[] = [
       "Protected booking routes with authentication-aware guards to prevent unauthenticated session bookings.",
       "Handled session-based tutor booking with schedule validation to avoid double-bookings.",
     ],
+    keyFeatures: ["Tutor Discovery", "Secure Booking", "Auth Guards"],
   },
   {
     name: "AllStar Equipment Store",
@@ -173,6 +179,7 @@ export const projects: Project[] = [
       "Stabilized cart state persistence across page refreshes and auth state changes.",
       "Maintained consistent category filtering and checkout behavior across desktop and mobile viewports.",
     ],
+    keyFeatures: ["Equipment Shop", "Cart System", "Mobile First"],
   },
   {
     name: "Career Advice",
@@ -199,5 +206,6 @@ export const projects: Project[] = [
       "Managed shared booking and user state across multiple route transitions using React Context API.",
       "Integrated auth-protected actions with client-side route guards for coaching bookings.",
     ],
+    keyFeatures: ["Resume Tools", "Coaching Flow", "Career Radar"],
   },
 ];

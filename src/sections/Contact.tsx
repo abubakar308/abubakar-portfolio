@@ -1,141 +1,149 @@
 "use client";
 
-import { Mail, Phone, MapPin, Send, MessageSquare, LinkedinIcon as Linkedin, FacebookIcon as Facebook } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
+import { Mail, Phone, MessageSquare, Send, CheckCircle, Smartphone } from "lucide-react";
 import Reveal from "@/components/common/Reveal";
-import Magnetic from "@/components/common/Magnetic";
+import { Button } from "@/components/ui/button";
+
+const contactCards = [
+  {
+    label: "Email Me",
+    value: "mdabubakar.dev@gmail.com",
+    icon: Mail,
+    href: "mailto:mdabubakar.dev@gmail.com",
+  },
+  {
+    label: "WhatsApp",
+    value: "+880 1780-559308",
+    icon: MessageSquare,
+    href: "https://wa.me/8801780559308",
+  },
+  {
+    label: "Call Me",
+    value: "+880 1780-559308",
+    icon: Smartphone,
+    href: "tel:+8801780559308",
+  },
+];
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-24 px-6 bg-background overflow-hidden text-foreground">
-      <div className="max-w-7xl mx-auto space-y-16 mt-11">
-        {/* Header */}
-        <Reveal width="100%">
-          <div className="text-center space-y-4 max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-3 text-accent-brand font-bold uppercase tracking-widest text-sm mb-2">
-              <span className="h-0.5 w-10 bg-accent-brand" />
-              Get In Touch
-              <span className="h-0.5 w-10 bg-accent-brand" />
-            </div>
-            <h2 className="text-4xl md:text-5xl font-heading font-extrabold text-foreground leading-none">
-               Let&apos;s Create <span className="text-accent-brand">Something Great</span>
-            </h2>
+    <section id="contact" className="py-24 md:py-32 bg-section relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-accent-brand/5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-blue-500/5 blur-[100px] rounded-full pointer-events-none" />
 
-            <p className="text-lg text-text-body/80 max-w-xl mx-auto leading-relaxed">
-              I&apos;m open to <strong className="text-foreground">full-stack opportunities and collaborations</strong> — let&apos;s build something meaningful together.
-            </p>
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+          
+          {/* ── Left Column: Text & Info ── */}
+          <div className="space-y-12">
+            <Reveal>
+              <div className="space-y-5">
+                <div className="flex items-center gap-3 text-accent-brand font-bold uppercase tracking-widest text-[11px] sm:text-xs">
+                  <span className="h-0.5 w-10 bg-accent-brand" />
+                  Get In Touch
+                </div>
+                <h2 className="text-4xl sm:text-5xl font-heading font-extrabold text-foreground leading-tight tracking-tight">
+                  Let&apos;s Build Something <br />
+                  <span className="text-accent-brand">Extraordinary</span>
+                </h2>
+                <p className="text-text-body text-base sm:text-lg max-w-lg leading-relaxed font-medium">
+                  I&apos;m currently <span className="text-foreground font-bold">open to full-stack opportunities</span> and collaborations. If you have a project in mind or just want to say hi, feel free to reach out!
+                </p>
+              </div>
+            </Reveal>
+
+            {/* Contact Cards */}
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+              {contactCards.map((card, index) => (
+                <Reveal key={card.label} horizontal delay={0.1 * index}>
+                  <a
+                    href={card.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block group"
+                  >
+                    <div className="p-6 bg-card border border-border/50 rounded-2xl flex items-center gap-5 transition-all duration-300 hover:border-accent-brand/40 hover:shadow-xl hover:shadow-accent-brand/5 hover:-translate-y-1">
+                      <div className="w-12 h-12 rounded-xl bg-background border border-border/40 flex items-center justify-center text-foreground group-hover:text-accent-brand group-hover:bg-accent-brand/5 transition-colors">
+                        <card.icon className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <p className="text-[10px] font-extrabold uppercase tracking-widest text-foreground/30 mb-0.5">
+                          {card.label}
+                        </p>
+                        <p className="text-sm font-bold text-foreground tracking-tight">
+                          {card.value}
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </Reveal>
+              ))}
+            </div>
           </div>
-        </Reveal>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Contact Details */}
-          <Reveal horizontal width="100%">
-            <div className="space-y-10">
-              <div className="space-y-8">
-                  <div className="flex items-start gap-6 group rounded-2xl border border-border/40 bg-card/40 p-4 hover:bg-card/70 hover:border-accent-brand/30 hover:shadow-lg transition-all duration-300">
-                     <div className="p-4 bg-accent-brand/10 text-accent-brand rounded-2xl group-hover:scale-110 transition-transform duration-300">
-                        <Mail className="w-6 h-6" />
-                     </div>
-
-                     <div className="space-y-1">
-                        <p className="text-foreground font-heading font-bold text-lg uppercase tracking-wider">Email Me</p>
-                        <p className="text-text-body/70">mdabubakar.dev@gmail.com</p>
-                     </div>
-
-                 </div>
-
-                 <div className="flex items-start gap-6 group rounded-2xl border border-border/40 bg-card/40 p-4 hover:bg-card/70 hover:border-accent-brand/30 hover:shadow-lg transition-all duration-300">
-                    <div className="p-4 bg-green-vibrant/10 text-green-vibrant rounded-2xl group-hover:scale-110 transition-transform duration-300">
-                       <Phone className="w-6 h-6" />
-                    </div>
-                     <div className="space-y-1">
-                        <p className="text-foreground font-heading font-bold text-lg uppercase tracking-wider">Call Me</p>
-                        <p className="text-text-body/70">+880 1773398308</p>
-                     </div>
-
-                 </div>
-
-                 <div className="flex items-start gap-6 group rounded-2xl border border-border/40 bg-card/40 p-4 hover:bg-card/70 hover:border-accent-brand/30 hover:shadow-lg transition-all duration-300">
-                    <div className="p-4 bg-amber-500/10 text-amber-500 rounded-2xl group-hover:scale-110 transition-transform duration-300">
-                       <MapPin className="w-6 h-6" />
-                    </div>
-                     <div className="space-y-1">
-                        <p className="text-foreground font-heading font-bold text-lg uppercase tracking-wider">Location</p>
-                        <p className="text-text-body/70">Dhaka, Bangladesh</p>
-                     </div>
-
-                 </div>
+          {/* ── Right Column: Form ── */}
+          <Reveal delay={0.2}>
+            <div className="bg-card border border-border/50 rounded-[2.5rem] p-8 sm:p-10 shadow-2xl shadow-accent-brand/5 relative overflow-hidden group">
+              <div className="absolute top-0 right-0 p-8 opacity-[0.03] rotate-12 transition-transform duration-700 group-hover:scale-110">
+                <Mail className="w-32 h-32 text-accent-brand" />
               </div>
 
-              <div className="p-8 rounded-3xl bg-card border border-border shadow-lg space-y-6">
-                 <h4 className="text-xl font-heading font-bold text-foreground flex items-center gap-3">
-                    Connect on Socials
-                    <div className="h-0.5 flex-1 bg-border" />
-                 </h4>
-                  <div className="flex gap-4">
-                     <a href="https://www.linkedin.com/in/abubakar308/" target="_blank" rel="noopener noreferrer" className="flex-1">
-                       <Button variant="outline" className="w-full rounded-2xl h-14 border-border text-foreground hover:bg-card hover:text-accent-brand transition-all duration-300 font-bold group shadow-sm hover:scale-105 hover:shadow-lg active:scale-95">
-                          <Linkedin className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform" />
-                          LinkedIn
-                       </Button>
-                     </a>
-                     <a href="https://www.facebook.com/mdabubakar308" target="_blank" rel="noopener noreferrer" className="flex-1">
-                       <Button variant="outline" className="w-full rounded-2xl h-14 border-border text-foreground hover:bg-card hover:text-accent-brand transition-all duration-300 font-bold group shadow-sm hover:scale-105 hover:shadow-lg active:scale-95">
-                          <Facebook className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform" />
-                          Facebook
-                       </Button>
-                     </a>
+              <div className="relative z-10 space-y-8">
+                <div className="space-y-2">
+                  <h3 className="text-2xl font-heading font-extrabold text-foreground">
+                    Send a Message
+                  </h3>
+                  <p className="text-sm text-text-body/60 font-medium">
+                    I typically respond within 24 hours.
+                  </p>
+                </div>
+
+                <form className="space-y-5">
+                  <div className="grid sm:grid-cols-2 gap-5">
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-foreground/40 ml-1">Name</label>
+                      <input
+                        type="text"
+                        placeholder="John Doe"
+                        className="w-full h-12 bg-background border border-border/60 rounded-xl px-4 text-sm font-bold text-foreground placeholder:text-text-body/30 focus:outline-none focus:border-accent-brand/50 transition-colors"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-foreground/40 ml-1">Email</label>
+                      <input
+                        type="email"
+                        placeholder="john@example.com"
+                        className="w-full h-12 bg-background border border-border/60 rounded-xl px-4 text-sm font-bold text-foreground placeholder:text-text-body/30 focus:outline-none focus:border-accent-brand/50 transition-colors"
+                      />
+                    </div>
                   </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-foreground/40 ml-1">Subject</label>
+                    <input
+                      type="text"
+                      placeholder="Project Inquiry"
+                      className="w-full h-12 bg-background border border-border/60 rounded-xl px-4 text-sm font-bold text-foreground placeholder:text-text-body/30 focus:outline-none focus:border-accent-brand/50 transition-colors"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-foreground/40 ml-1">Message</label>
+                    <textarea
+                      placeholder="Tell me about your vision..."
+                      rows={5}
+                      className="w-full bg-background border border-border/60 rounded-xl p-4 text-sm font-bold text-foreground placeholder:text-text-body/30 focus:outline-none focus:border-accent-brand/50 transition-colors resize-none"
+                    />
+                  </div>
+
+                  <Button className="w-full h-12 bg-accent-brand text-white hover:bg-accent-brand/90 rounded-xl text-[13px] font-bold shadow-xl shadow-accent-brand/20 transition-all hover:scale-[1.01] active:scale-[0.99]">
+                    <Send className="w-4 h-4 mr-2" />
+                    Send Message
+                  </Button>
+                </form>
               </div>
             </div>
           </Reveal>
 
-          {/* Contact Form */}
-          <Reveal horizontal delay={0.3} width="100%">
-             <Card className="border-none shadow-2xl p-8 md:p-12 rounded-[2.5rem] bg-primary text-primary-foreground relative overflow-hidden">
-                {/* Decorative glows for the card */}
-                <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-3xl" />
-                <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-black/10 rounded-full blur-2xl" />
-
-                <CardContent className="p-0 space-y-8 relative z-10">
-                   <div className="space-y-2">
-                      <h3 className="text-2xl font-heading font-extrabold flex items-center gap-3">
-                         <MessageSquare className="w-6 h-6 text-primary-foreground/80" />
-                         Send a Message
-                      </h3>
-                      <p className="text-primary-foreground/60 text-sm font-medium">Have a project in mind? Use the form below.</p>
-                   </div>
-
-                   <form className="space-y-6">
-                      <div className="space-y-2">
-                         <Label htmlFor="name" className="text-primary-foreground/70 font-bold uppercase text-[10px] tracking-widest px-1">Your Full Name</Label>
-                         <Input id="name" placeholder="John Doe" className="bg-primary-foreground/10 border-primary-foreground/10 h-14 rounded-xl text-primary-foreground placeholder:text-primary-foreground/30 focus:bg-primary-foreground/20 transition-colors border-none" />
-                      </div>
-                      
-                      <div className="space-y-2">
-                         <Label htmlFor="email" className="text-primary-foreground/70 font-bold uppercase text-[10px] tracking-widest px-1">Your Email Address</Label>
-                         <Input id="email" type="email" placeholder="john@example.com" className="bg-primary-foreground/10 border-primary-foreground/10 h-14 rounded-xl text-primary-foreground placeholder:text-primary-foreground/30 focus:bg-primary-foreground/20 transition-colors border-none" />
-                      </div>
-
-                      <div className="space-y-2">
-                         <Label htmlFor="message" className="text-primary-foreground/70 font-bold uppercase text-[10px] tracking-widest px-1">Message Content</Label>
-                         <textarea id="message" rows={5} placeholder="Tell me about your project..." className="w-full bg-primary-foreground/10 border-none rounded-xl p-4 text-primary-foreground placeholder:text-primary-foreground/30 focus:bg-primary-foreground/20 outline-none transition-colors" />
-                      </div>
-
-                      <Magnetic>
-                        <Button className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/90 h-14 rounded-xl text-base font-bold shadow-xl transition-all hover:scale-105 active:scale-95">
-                           <Send className="w-5 h-5 mr-3" />
-                           Send Message Now
-                        </Button>
-                      </Magnetic>
-                   </form>
-
-                </CardContent>
-             </Card>
-          </Reveal>
         </div>
       </div>
     </section>

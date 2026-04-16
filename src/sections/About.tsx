@@ -43,49 +43,56 @@ const quickFacts = [
 
 export default function About() {
   return (
-    <section id="about" className="py-24 px-6 bg-section overflow-hidden">
-      <div className="max-w-7xl mx-auto space-y-16">
+    <section id="about" className="py-24 md:py-32 bg-section overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 space-y-20">
+
         {/* Header */}
         <Reveal>
-          <div className="space-y-4 max-w-2xl">
-            <div className="flex items-center gap-3 text-accent-brand font-bold uppercase tracking-widest text-sm">
+          <div className="space-y-4 max-w-3xl">
+            <div className="flex items-center gap-3 text-accent-brand font-bold uppercase tracking-widest text-[11px] sm:text-xs">
               <span className="h-0.5 w-10 bg-accent-brand" />
-              About Me
+              About My Craft
             </div>
-            <h2 className="text-4xl md:text-5xl font-heading font-extrabold text-foreground">
-              Who I Am &{" "}
-              <span className="text-accent-brand">What I Build</span>
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-extrabold text-foreground leading-[1.1] tracking-tight">
+              Engineering Scalable <br />
+              <span className="text-accent-brand">Solutions</span>
             </h2>
-            <p className="text-text-body text-lg leading-relaxed max-w-xl">
-              A results-oriented Full Stack Developer who turns ideas into
-              fast, scalable, and production-ready web applications.
+            <p className="text-text-body text-base sm:text-lg leading-relaxed max-w-2xl">
+              I am a results-driven developer who thrives on turning complex problems 
+              into seamless digital experiences. My focus is on writing clean, 
+              maintainable code that delivers real business value.
             </p>
           </div>
         </Reveal>
 
         {/* Quick Facts Grid */}
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {quickFacts.map((fact, index) => (
-            <Reveal key={fact.label} horizontal delay={0.2 + index * 0.12}>
-              <Card className="h-full bg-card border border-border/50 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
-                <CardContent className="p-6 space-y-4">
+            <Reveal key={fact.label} horizontal delay={0.1 * index} className="h-full">
+              <Card className="h-full bg-card border border-border/50 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-500 rounded-3xl group">
+                <CardContent className="p-7 sm:p-9 space-y-6">
                   {/* Icon + Label */}
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-4">
                     <div
-                      className={`p-2.5 rounded-xl ${fact.bg} ${fact.color} transition-transform group-hover:scale-110 duration-300 flex-shrink-0`}
+                      className={`p-3 rounded-2xl ${fact.bg} ${fact.color} flex-shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3`}
                     >
-                      <fact.icon className="w-5 h-5" />
+                      <fact.icon className="w-5 h-5 sm:w-6 sm:h-6" />
                     </div>
-                    <h3 className="text-base font-heading font-bold text-foreground">
+                    <h3 className="text-lg font-heading font-extrabold text-foreground tracking-tight">
                       {fact.label}
                     </h3>
                   </div>
 
                   {/* Bullet Points */}
-                  <ul className="space-y-2">
+                  <ul className="space-y-3.5">
                     {fact.points.map((point, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm text-text-body leading-snug">
-                        <CheckCircle className={`w-3.5 h-3.5 ${fact.color} flex-shrink-0 mt-0.5`} />
+                      <li
+                        key={i}
+                        className="flex items-start gap-3.5 text-sm text-text-body/90 leading-relaxed font-medium"
+                      >
+                        <CheckCircle
+                          className="w-4 h-4 text-accent-brand flex-shrink-0 mt-0.5 opacity-40"
+                        />
                         <span>{point}</span>
                       </li>
                     ))}
@@ -96,46 +103,51 @@ export default function About() {
           ))}
         </div>
 
-        {/* Quote + CTA */}
-        <Reveal delay={0.5}>
-          <div className="grid md:grid-cols-2 gap-6 items-center">
+        {/* Quote + CTA — horizontal on desktop */}
+        <Reveal delay={0.3}>
+          <div className="grid lg:grid-cols-5 gap-6">
             {/* Quote */}
-            <div className="p-6 bg-card/50 border-l-4 border-accent-brand rounded-r-2xl italic text-foreground font-medium text-base md:text-lg shadow-sm">
-              &quot;Building great software is not just about writing code — it&apos;s
-              about solving real human problems through technology.&quot;
-              <div className="flex items-center gap-2 mt-4 not-italic">
-                <Heart className="w-4 h-4 text-red-500 fill-red-500" />
-                <p className="text-sm text-text-body">
-                  Driven by passion, fueled by coffee, inspired by innovation.
+            <div className="lg:col-span-3 p-8 sm:p-10 bg-card/40 border border-border rounded-[2.5rem] relative overflow-hidden group">
+              <div className="absolute top-0 right-0 p-10 opacity-[0.03] rotate-12 transition-transform duration-700 group-hover:scale-110">
+                <Sparkles className="w-32 h-32 text-accent-brand" />
+              </div>
+              
+              <div className="relative z-10 space-y-6">
+                <p className="text-xl sm:text-2xl font-medium text-foreground leading-relaxed italic">
+                  &quot;Software engineering is the art of solving human problems through elegant, scalable technology.&quot;
                 </p>
+                <div className="flex items-center gap-3">
+                  <div className="h-px w-8 bg-accent-brand/40" />
+                  <p className="text-sm font-bold text-accent-brand uppercase tracking-widest">
+                    My Philosophy
+                  </p>
+                </div>
               </div>
             </div>
 
             {/* CTA Banner */}
-            <div className="p-7 rounded-[1.5rem] bg-primary text-primary-foreground flex flex-col gap-4 overflow-hidden relative shadow-2xl shadow-accent-brand/10">
-              <div className="z-10">
-                <p className="text-primary-foreground/70 font-bold text-[10px] tracking-widest uppercase mb-1">
+            <div className="lg:col-span-2 p-8 sm:p-10 rounded-[2.5rem] bg-card border border-border flex flex-col justify-between gap-6 overflow-hidden relative shadow-xl shadow-accent-brand/5 group">
+              <div className="relative z-10 space-y-2">
+                <p className="text-accent-brand font-extrabold text-[10px] tracking-[0.25em] uppercase">
                   Status
                 </p>
-                <p className="text-xl font-heading font-extrabold">
-                  Open for Full-Stack Opportunities
-                </p>
-                <p className="text-primary-foreground/60 text-sm mt-1">
-                  Available for remote & on-site roles worldwide.
+                <p className="text-2xl font-heading font-extrabold leading-tight text-foreground">
+                  Open for <br />Opportunities
                 </p>
               </div>
-              <a href="#projects" className="z-10">
+              
+              <a href="#projects" className="relative z-10 w-fit">
                 <Button
-                  size="sm"
-                  variant="secondary"
-                  className="font-bold rounded-full px-6 bg-secondary text-secondary-foreground hover:bg-secondary/90 shadow-lg hover:scale-105 active:scale-95 transition-transform"
+                  size="lg"
+                  className="font-bold rounded-2xl px-8 bg-accent-brand text-white hover:bg-accent-brand/90 shadow-lg shadow-accent-brand/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
                 >
                   View My Projects
                 </Button>
               </a>
+
               {/* Decorative glows */}
-              <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-3xl" />
-              <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-black/10 rounded-full blur-2xl" />
+              <div className="absolute -top-10 -right-10 w-40 h-40 bg-accent-brand/10 rounded-full blur-[80px] pointer-events-none group-hover:scale-110 transition-transform duration-700" />
+              <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-accent-soft/5 rounded-full blur-[60px] pointer-events-none" />
             </div>
           </div>
         </Reveal>

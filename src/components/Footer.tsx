@@ -1,83 +1,70 @@
 "use client";
 
-import { SiGithub, SiFacebook } from "react-icons/si";
-import { Mail } from "lucide-react";
-import { motion } from "framer-motion";
-import Magnetic from "@/components/common/Magnetic";
-import { SlSocialLinkedin } from "react-icons/sl";
+import { Github, Linkedin, Facebook, Mail } from "lucide-react";
 
 const socialLinks = [
-  { name: "GitHub", href: "https://github.com/abubakar308", icon: SiGithub },
-  {
-    name: "LinkedIn",
-    href: "https://www.linkedin.com/in/abubakar308/",
-    icon: SlSocialLinkedin,
-  },
-  {
-    name: "Facebook",
-    href: "https://www.facebook.com/mdabubakar308",
-    icon: SiFacebook,
-  },
-  {
-    name: "Email",
-    href: "mailto:mdabubakar.dev@gmail.com",
-    icon: Mail,
-  },
+  { name: "GitHub", href: "https://github.com/abubakar308", icon: Github },
+  { name: "LinkedIn", href: "https://www.linkedin.com/in/abubakar308/", icon: Linkedin },
+  { name: "Facebook", href: "https://www.facebook.com/mdabubakar308", icon: Facebook },
+  { name: "Email", href: "mailto:mdabubakar.dev@gmail.com", icon: Mail },
 ];
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-
   return (
-    <footer className="relative w-full border-t border-border bg-section px-6 py-12">
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-brand/40 to-transparent" />
+    <footer className="py-16 bg-background border-t border-border/40">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
+        <div className="flex flex-col items-center justify-center space-y-10">
+          
+          {/* Brand/Identity */}
+          <div className="text-center space-y-4">
+             <div className="inline-flex items-center gap-3 mb-2 translate-x-3">
+                <div className="bg-teal-500 text-white font-bold rounded-full w-10 h-10 flex items-center justify-center text-xs shadow-xl shadow-teal-500/20">
+                  AB
+                </div>
+                <span className="text-lg font-heading font-extrabold text-foreground tracking-tight">Abu Bakar</span>
+             </div>
+             
+             <div className="space-y-1">
+               <p className="text-[10px] font-extrabold uppercase tracking-[0.3em] text-accent-brand">
+                 Full Stack Developer
+               </p>
+               <p className="text-sm font-medium text-text-body/60 max-w-sm mx-auto leading-relaxed">
+                 Engineering scalable, production-ready applications with modern technology and clean architecture.
+               </p>
+             </div>
+          </div>
 
-      <div className="mx-auto flex max-w-7xl flex-col items-center gap-8 text-center">
-        <div className="space-y-3">
-          <h2 className="font-heading text-2xl font-extrabold uppercase tracking-tight text-foreground md:text-3xl">
-            Md Abu Bakar Siddique
-          </h2>
+          {/* Social Links */}
+          <div className="flex items-center gap-6">
+            {socialLinks.map((social) => (
+              <a
+                key={social.name}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-3 bg-card border border-border/50 rounded-2xl text-text-body/40 hover:text-accent-brand hover:border-accent-brand/30 hover:shadow-xl transition-all duration-300 group"
+                aria-label={social.name}
+              >
+                <social.icon className="w-5 h-5 transition-transform group-hover:scale-110" />
+              </a>
+            ))}
+          </div>
 
-          <p className="mx-auto max-w-2xl text-sm leading-7 text-text-body md:text-base">
-            Full Stack Developer specializing in building modern, scalable web
-            applications with Next.js, TypeScript, and clean user-focused design.
-          </p>
-        </div>
-
-        <div className="flex flex-wrap items-center justify-center gap-4">
-          {socialLinks.map((social) => {
-            const Icon = social.icon;
-
-            return (
-              <Magnetic key={social.name}>
-                <motion.a
-                  whileHover={{ scale: 1.08, y: -4 }}
-                  whileTap={{ scale: 0.96 }}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.name}
-                  title={social.name}
-                  className="group flex h-12 w-12 items-center justify-center rounded-2xl border border-border bg-card text-text-body shadow-sm transition-all duration-300 hover:border-accent-brand/50 hover:bg-accent-brand/5 hover:text-accent-brand hover:shadow-lg hover:shadow-accent-brand/10"
-                >
-                  <Icon className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
-                </motion.a>
-              </Magnetic>
-            );
-          })}
-        </div>
-
-        <div className="space-y-2">
-          <a
-            href="mailto:mdabubakar.dev@gmail.com"
-            className="text-sm text-text-body transition-colors duration-300 hover:text-accent-brand"
-          >
-            mdabubakar.dev@gmail.com
-          </a>
-
-          <p className="text-xs text-text-body/60">
-            © {currentYear} Md Abu Bakar Siddique. All rights reserved.
-          </p>
+          {/* Copyright Area */}
+          <div className="pt-10 border-t border-border/20 w-full text-center">
+            <div className="flex flex-col items-center gap-2">
+              <p className="text-[10px] font-extrabold text-foreground/20 uppercase tracking-[0.4em]">
+                © {new Date().getFullYear()} Md Abu Bakar Siddique
+              </p>
+              <div className="flex items-center gap-3">
+                 <div className="h-px w-8 bg-border/20" />
+                 <p className="text-[9px] font-bold text-foreground/15 uppercase tracking-widest">
+                   Built with Precision & Passion
+                 </p>
+                 <div className="h-px w-8 bg-border/20" />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

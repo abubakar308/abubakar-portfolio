@@ -39,51 +39,51 @@
 
 :root {
   /* Premium Light Theme */
-  --background: #f5f8fc;
+  --background: #f8fafc;
   --section: #ffffff;
-  --card: #eef4fa;
-  --border: #d8e2ee;
+  --card: #f1f5f9;
+  --border: #e2e8f0;
   --foreground: #0f172a;
-  --text-body: #52637a;
+  --text-body: #475569;
   --accent-brand: #0891b2;
   --accent-soft: #06b6d4;
 
-  --primary: #0f172a;
+  --primary: #1e293b;
   --primary-foreground: #f8fafc;
-  --secondary: #e9f0f7;
-  --secondary-foreground: #0f172a;
-  --muted: #f3f7fb;
-  --muted-foreground: #6b7c93;
+  --secondary: #f1f5f9;
+  --secondary-foreground: #1e293b;
+  --muted: #f8fafc;
+  --muted-foreground: #64748b;
   --accent: #0891b2;
   --accent-foreground: #ffffff;
-  --destructive: #dc2626;
-  --input: #dbe5f0;
+  --destructive: #ef4444;
+  --input: #e2e8f0;
   --ring: #0891b2;
   --radius: 0.75rem;
 }
 
 .dark {
   /* Premium Dark Theme */
-  --background: #06101d;
-  --section: #0b1526;
-  --card: #101d33;
-  --border: #1f3352;
+  --background: #020617;
+  --section: #0f172a;
+  --card: #1e293b;
+  --border: #334155;
   --foreground: #f8fafc;
-  --text-body: #b8c7db;
-  --accent-brand: #14c7f5;
-  --accent-soft: #22d3ee;
+  --text-body: #94a3b8;
+  --accent-brand: #22d3ee;
+  --accent-soft: #67e8f9;
 
-  --primary: #14c7f5;
-  --primary-foreground: #06101d;
-  --secondary: #13233d;
+  --primary: #22d3ee;
+  --primary-foreground: #020617;
+  --secondary: #1e293b;
   --secondary-foreground: #f8fafc;
-  --muted: #0f1c31;
-  --muted-foreground: #8ca0b8;
-  --accent: #14c7f5;
-  --accent-foreground: #06101d;
+  --muted: #0f172a;
+  --muted-foreground: #64748b;
+  --accent: #22d3ee;
+  --accent-foreground: #020617;
   --destructive: #7f1d1d;
-  --input: #1f3352;
-  --ring: #14c7f5;
+  --input: #334155;
+  --ring: #22d3ee;
 }
 
 @layer base {
@@ -93,20 +93,21 @@
 
   html {
     @apply bg-background;
+    font-size: 15px; /* Base size for better desktop readability */
+    @screen sm { font-size: 16px; }
   }
 
   body {
-    @apply bg-background text-text-body font-body;
+    @apply bg-background text-text-body font-body antialiased;
+    line-height: 1.625;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-heading uppercase tracking-tight text-foreground;
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading uppercase tracking-[-0.02em] text-foreground;
   }
+
+  h1 { @apply tracking-[-0.04em]; }
+  h2 { @apply tracking-[-0.03em]; }
 }
 
 /* Lenis Smooth Scroll Stylings */

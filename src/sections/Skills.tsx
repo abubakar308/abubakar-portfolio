@@ -1,7 +1,6 @@
 "use client";
 
 import type { IconType } from "react-icons";
-import type React from "react";
 import {
   SiCss,
   SiExpress,
@@ -25,22 +24,22 @@ import {
   SiSupabase,
 } from "react-icons/si";
 import Reveal from "@/components/common/Reveal";
+import { Badge } from "@/components/ui/badge";
 
 type SkillItem = {
   name: string;
   icon: IconType;
+  highlight?: boolean;
 };
 
 type SkillCategory = {
   title: string;
   skills: SkillItem[];
-  direction: "left" | "right";
 };
 
 const skillCategories: SkillCategory[] = [
   {
     title: "Frontend",
-    direction: "right",
     skills: [
       { name: "HTML", icon: SiHtml5 },
       { name: "CSS", icon: SiCss },
@@ -54,11 +53,14 @@ const skillCategories: SkillCategory[] = [
   },
   {
     title: "Backend",
-    direction: "left",
     skills: [
       { name: "Node.js", icon: SiNodedotjs },
       { name: "Express.js", icon: SiExpress },
-      { name: "Prisma", icon: SiPrisma },
+    ],
+  },
+  {
+    title: "Database",
+    skills: [
       { name: "MongoDB", icon: SiMongodb },
       { name: "PostgreSQL", icon: SiPostgresql },
       { name: "Firebase", icon: SiFirebase },
@@ -66,8 +68,13 @@ const skillCategories: SkillCategory[] = [
     ],
   },
   {
-    title: "Other",
-    direction: "right",
+    title: "ORM",
+    skills: [
+      { name: "Prisma", icon: SiPrisma, highlight: true },
+    ],
+  },
+  {
+    title: "Tools",
     skills: [
       { name: "Git", icon: SiGit },
       { name: "GitHub", icon: SiGithub },
@@ -79,100 +86,95 @@ const skillCategories: SkillCategory[] = [
 ];
 
 export default function Skills() {
-const animationClass = (direction: "left" | "right") => {
-  return direction === "left"
-    ? "animate-skill-marquee-left"
-    : "animate-skill-marquee-right";
-};
-
   return (
-    <section id="skills" className="relative overflow-hidden bg-background py-24">
-      <div className="absolute left-0 top-0 h-32 w-full bg-gradient-to-b from-section to-transparent opacity-50" />
+    <section id="skills" className="relative overflow-hidden bg-background py-24 md:py-32">
+      {/* Subtle Background Glows */}
+      <div className="absolute left-[10%] top-[-10%] h-[500px] w-[500px] rounded-full bg-accent-brand/[0.03] blur-[120px] pointer-events-none" />
+      <div className="absolute right-[10%] bottom-[-10%] h-[500px] w-[500px] rounded-full bg-blue-500/[0.03] blur-[120px] pointer-events-none" />
 
-      <div className="relative z-10 mb-16 mx-auto max-w-7xl px-6">
-        <Reveal className="mx-auto" width="100%">
-          <div className="mx-auto max-w-3xl space-y-4 text-center">
-            <div className="mb-2 inline-flex items-center gap-3 text-sm font-bold uppercase tracking-widest text-accent-brand">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
+        
+        {/* Header */}
+        <Reveal width="100%">
+          <div className="space-y-4 max-w-3xl mb-24">
+            <div className="flex items-center gap-3 text-accent-brand font-bold uppercase tracking-widest text-[11px] sm:text-xs">
               <span className="h-0.5 w-10 bg-accent-brand" />
-              Technical Arsenal
-              <span className="h-0.5 w-10 bg-accent-brand" />
+              Technical Stack
             </div>
-
-            <h2 className="font-heading text-4xl font-extrabold text-foreground md:text-5xl">
-              Professional <span className="text-accent-brand">Skillset</span>
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-extrabold text-foreground leading-[1.1] tracking-tight">
+              Crafting with <br />
+              <span className="text-accent-brand">Modern Tech</span>
             </h2>
-
-            <p className="mx-auto max-w-2xl text-lg leading-relaxed text-text-body">
-              A recruiter-friendly overview of the core technologies I use to build
-              robust, modern products.
+            <p className="text-text-body/70 text-base sm:text-lg leading-relaxed max-w-2xl font-medium">
+              A recruiter-friendly overview of my core competencies, organized by 
+              specialization for efficient review and technical assessment.
             </p>
           </div>
         </Reveal>
-      </div>
 
-      <div className="flex flex-col gap-10">
-        {skillCategories.map((category) => (
-          <div key={category.title} className="space-y-4">
-            <Reveal width="100%" className="mx-auto max-w-7xl px-6">
-              <h3 className="ml-4 border-l-4 border-accent-brand px-2 text-lg font-bold uppercase tracking-widest text-foreground/80 md:ml-0">
-                {category.title}
-              </h3>
-            </Reveal>
-
-            <div className="relative overflow-hidden py-4">
-              <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-background to-transparent" />
-              <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-background to-transparent" />
-
-              <div className="group mx-auto max-w-7xl overflow-hidden px-6">
-               <div
-    className={`flex w-max gap-6 ${animationClass(category.direction)}`}
-    style={
-      {
-        ["--skill-motion-duration"]: "45s",
-      } as React.CSSProperties
-    }
-    onMouseEnter={(e) => {
-      (e.currentTarget as HTMLElement).style.animationPlayState = "paused";
-    }}
-    onMouseLeave={(e) => {
-      (e.currentTarget as HTMLElement).style.animationPlayState = "running";
-    }}
-  >
-                  {[...category.skills, ...category.skills].map((skill, index) => (
-                    <SkillIcon
-                      key={`${category.title}-${skill.name}-${index}`}
-                      skill={skill}
-                      ariaHidden={index >= category.skills.length}
-                    />
-                  ))}
+        {/* Categories Grid */}
+        <div className="grid gap-16 md:gap-20">
+          {skillCategories.map((category, catIndex) => (
+            <div key={category.title} className="space-y-8">
+              <Reveal delay={catIndex * 0.05}>
+                <div className="flex items-center gap-6">
+                  <h3 className="text-xs font-extrabold uppercase tracking-[0.3em] text-foreground/30 whitespace-nowrap">
+                    {category.title}
+                  </h3>
+                  <div className="h-px flex-1 bg-border/40" />
                 </div>
+              </Reveal>
+
+              <div className="flex flex-wrap gap-4 sm:gap-6">
+                {category.skills.map((skill, index) => (
+                  <Reveal 
+                    key={skill.name} 
+                    delay={catIndex * 0.05 + index * 0.02}
+                    horizontal
+                    className="h-full"
+                  >
+                    <div className={`
+                      group relative overflow-hidden flex items-center gap-3.5 px-6 py-3.5 rounded-2xl border transition-all duration-500
+                      ${skill.highlight 
+                        ? "bg-accent-brand/[0.08] border-accent-brand/40 shadow-lg shadow-accent-brand/5 scale-[1.05]" 
+                        : "bg-card/40 border-border/50 hover:border-accent-brand/30 hover:bg-card hover:-translate-y-1 hover:shadow-xl hover:shadow-accent-brand/5"
+                      }
+                    `}>
+                      {/* Icon Container */}
+                      <div className={`
+                        flex items-center justify-center transition-all duration-500
+                        ${skill.highlight ? "text-accent-brand scale-110" : "text-foreground/40 group-hover:text-accent-brand group-hover:scale-110"}
+                      `}>
+                        <skill.icon className="w-5 h-5" />
+                      </div>
+
+                      {/* Info */}
+                      <div className="flex flex-col">
+                        <span className={`
+                          text-xs font-bold uppercase tracking-widest transition-colors
+                          ${skill.highlight ? "text-foreground" : "text-text-body/60 group-hover:text-foreground"}
+                        `}>
+                          {skill.name}
+                        </span>
+                        {skill.highlight && (
+                          <span className="text-[8px] font-extrabold text-accent-brand uppercase tracking-tighter mt-0.5 animate-pulse">
+                            Primary Choice
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Decorative corner glow for highlight */}
+                      {skill.highlight && (
+                        <div className="absolute top-0 right-0 h-8 w-8 bg-accent-brand/10 blur-xl rounded-full" />
+                      )}
+                    </div>
+                  </Reveal>
+                ))}
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
-  );
-}
-
-function SkillIcon({
-  skill,
-  ariaHidden = false,
-}: {
-  skill: SkillItem;
-  ariaHidden?: boolean;
-}) {
-  return (
-    <div
-      className="group/skill shrink-0"
-      aria-hidden={ariaHidden ? "true" : undefined}
-    >
-      <div className="flex min-w-[150px] items-center justify-center gap-3 rounded-2xl border border-border/70 bg-card p-5 text-center transition-all duration-300 hover:scale-[1.05] group-hover/skill:border-accent-brand/50 group-hover/skill:bg-accent-brand/5 group-hover/skill:shadow-xl group-hover/skill:shadow-accent-brand/10 md:min-w-[190px] md:p-6">
-        <skill.icon className="h-6 w-6 text-foreground/75 transition-colors group-hover/skill:text-accent-brand md:h-8 md:w-8" />
-        <p className="whitespace-nowrap text-sm font-bold uppercase tracking-wider text-text-body transition-colors group-hover/skill:text-foreground md:text-base">
-          {skill.name}
-        </p>
-      </div>
-    </div>
   );
 }

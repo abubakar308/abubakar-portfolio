@@ -81,7 +81,10 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             </button>
 
             {/* Scrollable Content */}
-            <div className="overflow-y-auto flex-1">
+            <div 
+              className="overflow-y-auto flex-1 min-h-0" 
+              data-lenis-prevent
+            >
               {/* Project Image + Title */}
               <div className="relative w-full aspect-video overflow-hidden flex-shrink-0">
                 <Image
