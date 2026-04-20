@@ -13,15 +13,15 @@ const contactCards = [
   },
   {
     label: "WhatsApp",
-    value: "+880 1780-559308",
+    value: "+880 1773398308",
     icon: MessageSquare,
-    href: "https://wa.me/8801780559308",
+    href: "https://wa.me/8801773398308",
   },
   {
     label: "Call Me",
-    value: "+880 1780-559308",
+    value: "+880 1773398308",
     icon: Smartphone,
-    href: "tel:+8801780559308",
+    href: "tel:+8801773398308",
   },
 ];
 

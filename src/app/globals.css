@@ -94,7 +94,6 @@
   html {
     @apply bg-background;
     font-size: 15px; /* Base size for better desktop readability */
-    @screen sm { font-size: 16px; }
   }
 
   body {
