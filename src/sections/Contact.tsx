@@ -1,6 +1,6 @@
 "use client";
 
-import { Mail, Phone, MessageSquare, Send, CheckCircle, Smartphone } from "lucide-react";
+import { Mail, MessageSquare, Send, Smartphone } from "lucide-react";
 import Reveal from "@/components/common/Reveal";
 import { Button } from "@/components/ui/button";
 
